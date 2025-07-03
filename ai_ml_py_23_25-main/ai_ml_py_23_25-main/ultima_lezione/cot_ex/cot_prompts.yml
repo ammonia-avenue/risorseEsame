@@ -1,0 +1,50 @@
+zero_shot: |
+  Problem: Problem: A pizza costs $18 and is cut into 8 slices. 
+          If 3 people equally share the pizza and each person eats 2 slices, 
+          how much does each person pay?
+
+  Let's think step by step.
+few_shot: |
+  Problem: If a train travels 60 miles in 45 minutes, what is its speed in miles per hour?
+  Solution: 
+  Step 1: Convert 45 minutes to hours: 45 ÷ 60 = 0.75 hours
+  Step 2: Calculate speed: 60 miles ÷ 0.75 hours = 80 mph
+  Answer: 80 miles per hour
+
+  Problem: A recipe calls for 2.5 cups of flour to make 12 cookies. How much flour is needed to make 30 cookies?
+  Solution:
+  Step 1: Find flour per cookie: 2.5 ÷ 12 = 0.208 cups per cookie
+  Step 2: Calculate for 30 cookies: 0.208 × 30 = 6.25 cups
+  Answer: 6.25 cups of flour
+
+  Problem: A car depreciates 15% each year. If it's worth $20,000 today, what will it be worth in 3 years?
+  Solution:
+self_consistency: |
+  Problem: In a class of 30 students, 18 like pizza, 12 like burgers, and 6 like both.
+           How many students like neither pizza nor burgers?
+
+  Solve this problem using multiple approaches to verify the answer:
+  
+  Approach 1: Using Venn diagrams
+  Approach 2: Using set theory formulas  
+  Approach 3: Using logical reasoning
+  
+  Show your work for each approach and confirm they give the same answer.
+chain_of_verification: |
+  Problem: What is the capital of Australia?
+
+  Step 1: Initial answer
+  Step 2: Verify this answer by considering:
+  - Is this the largest city in Australia?
+  - Is this where the government is located?
+  - What other major cities might be confused with the capital?
+  Step 3: Final verified answer with explanation
+multi_step_reasoning: |
+  Problem: A company's revenue increased by 25% in Year 1, decreased by 10% in Year 2, and increased by 15% in Year 3. 
+           If the final revenue is $1,265,000, what was the initial revenue?
+
+  Let's work backwards step by step:
+  Step 1: Identify what we know and what we need to find
+  Step 2: Set up the equation with the revenue changes
+  Step 3: Work backwards from the final amount
+  Step 4: Verify our answer by working forwards

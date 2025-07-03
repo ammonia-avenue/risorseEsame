@@ -1,0 +1,73 @@
+🧭 Guida completa: FastAPI + venv + VSCode
+✅ Prerequisiti
+Assicurati di avere installato:
+
+Python (3.8 o superiore)
+
+Visual Studio Code
+
+L'estensione Python per VSCode (cerca "Python" nella sezione Extensions)
+
+🔧 1. Crea la cartella del progetto
+Apri VSCode, poi:
+
+Vai su File → Open Folder...
+
+Crea e apri una nuova cartella, es. fastapi-progetto
+
+🐍 2. Crea l'ambiente virtuale (venv)
+Apri il terminale in VSCode (CTRL+ò o Terminal → New Terminal) e digita:
+
+
+python -m venv venv
+Se non funziona, prova python3 -m venv venv
+
+▶️ 3. Attiva l’ambiente virtuale
+
+Su Windows:
+
+venv\Scripts\Activate.ps1
+⚠️ VSCode spesso ti suggerisce automaticamente di usare l’ambiente virtuale: clicca su "Yes" se compare in alto.
+
+🧠 4. Seleziona l'interprete Python
+Se non l’ha fatto automaticamente:
+
+Premi CTRL+Shift+P → scrivi: Python: Select Interpreter
+
+Scegli: ./venv/bin/python (o venv\Scripts\python.exe su Windows)
+
+📦 5. Installa FastAPI e Uvicorn
+Con l'ambiente attivo nel terminale:
+
+
+pip install fastapi uvicorn
+📝 6. Crea il file main.py
+Nel progetto, crea un file chiamato main.py:
+
+from fastapi import FastAPI
+
+app = FastAPI()
+
+@app.get("/")
+def leggi_home():
+    return {"messaggio": "Ciao da FastAPI su VSCode!"}
+🚀 7. Avvia l'app
+Nel terminale (sempre con l’ambiente attivo):
+
+
+uvicorn main:app --reload
+Vai su http://127.0.0.1:8000
+Docs: http://127.0.0.1:8000/docs
+
+📃 8. (Consigliato) Aggiungi requirements.txt
+Nel terminale:
+
+bash
+Copia
+Modifica
+pip freeze > requirements.txt
+Serve per ricreare l’ambiente in futuro o su altri PC.
+
+✅ Fine!
+Hai ora un progetto FastAPI funzionante con ambiente virtuale su VSCode. Vuoi che ti generi un esempio completo già pronto in uno zip?
+

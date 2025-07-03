@@ -1,0 +1,136 @@
+-------------------------------------------------------------------
+--Esercizio 1: ESEGUIRE QUESTO CODICE PER VERIFICARE DI AVERE I PERMESSI IN LETTURA E SCRITTURA
+-------------------------------------------------------------------
+
+CREATE TABLE ft_utente (
+    id SERIAL PRIMARY KEY,
+    name VARCHAR(50) NOT NULL,
+    email VARCHAR(50) NOT NULL UNIQUE,
+    age INTEGER NOT NULL
+);
+INSERT INTO ft_utente (name, email, age) VALUES ('Mario Rossi', 'mario.rossi@example.com', 35);
+INSERT INTO ft_utente (name, email, age) VALUES ('Paolo Bianchi', 'paolo.bianchi@example.com', 28);
+INSERT INTO ft_utente (name, email, age) VALUES ('Chiara Neri', 'chiara.neri@example.com', 42);
+
+-------------------------------------------------------------------
+--Esercizio 2: CREARE LE SEGUENTI TABELLE:
+-------------------------------------------------------------------
+1. Tabella "studenti":
+Campo "matricola": chiave primaria numerica auto-incrementale
+Campo "nome": testuale con lunghezza massima di 50 caratteri
+Campo "cognome": testuale con lunghezza massima di 50 caratteri
+Campo "data_nascita": data
+Campo "email": testuale con lunghezza massima di 100 caratteri
+
+2. Tabella "prodotti":
+Campo "id_prodotto": chiave primaria numerica auto-incrementale
+Campo "nome_prodotto": testuale con lunghezza massima di 100 caratteri
+Campo "prezzo": numerico con 2 decimali
+Campo "quantita": numerico intero
+
+3. Tabella "clienti":
+Campo "id_cliente": chiave primaria testuale con lunghezza massima di 10 caratteri
+Campo "nome": testuale con lunghezza massima di 50 caratteri
+Campo "cognome": testuale con lunghezza massima di 50 caratteri
+Campo "indirizzo": testuale con lunghezza massima di 100 caratteri
+Campo "citta": testuale con lunghezza massima di 50 caratteri
+Campo "stato": testuale con lunghezza massima di 50 caratteri
+
+4. Tabella "libri":
+Campo "id_libro": chiave primaria numerica auto-incrementale
+Campo "titolo": testuale con lunghezza massima di 100 caratteri
+Campo "autore": testuale con lunghezza massima di 50 caratteri
+Campo "genere": testuale con lunghezza massima di 50 caratteri
+Campo "prezzo": numerico con 2 decimali
+
+5. Tabella "ordini":
+Campo "id_ordine": chiave primaria numerica auto-incrementale
+Campo "data_ordine": data
+Campo "quantita": numerico intero
+Campo "prezzo_totale": numerico con 2 decimali
+Campo "id_prodotto": chiave esterna alla tabella "prodotti"
+Campo "id_cliente": chiave esterna alla tabella "clienti"
+
+-------------------------------------------------------------------
+--Esercizio 3: CREARE LA SEGUENTE ARCHITETTURA DB
+-------------------------------------------------------------------
+Obiettivo:
+Creare un database con tre tabelle relazionate tra loro, contenenti informazioni su una scuola.
+
+Descrizione:
+Il database deve contenere le seguenti tabelle:
+
+La tabella "studente" deve contenere le informazioni su ogni studente, 
+tra cui il nome, il cognome, la data di nascita e l'anno di iscrizione alla scuola.
+
+La tabella "classe" deve contenere le informazioni su ogni classe, 
+tra cui il nome della classe, il livello scolastico e l'anno scolastico.
+
+La tabella "iscrizione" deve contenere le informazioni su quali studenti sono iscritti a quali classi, 
+con un riferimento alle tabelle "Studenti" e "Classi" tramite i loro identificatori univoci.
+
+L'esercizio consiste nel creare le tre tabelle e popolarle con alcuni dati di esempio. 
+In particolare, devono essere create almeno tre classi e almeno cinque studenti, 
+e ogni studente deve essere iscritto a almeno una classe.
+
+Suggerimenti:
+
+Usa il tipo di dato "SERIAL" per generare identificatori univoci per le tabelle "Studente" e "Classe".
+Usa il tipo di dato "DATE" per la data di nascita degli studenti e il tipo di dato "INTEGER" per l'anno di iscrizione e il livello scolastico delle classi.
+Usa la clausola "REFERENCES" per creare le relazioni tra le tabelle "Iscrizione", "Studente" e "Classe".
+Usa la clausola "ON DELETE CASCADE" per assicurarti che le iscrizioni vengano eliminate automaticamente quando uno studente o una classe viene eliminato dal database.
+
+
+-- Creazione della tabella Studente
+CREATE TABLE Studente (
+    id SERIAL PRIMARY KEY,
+    nome VARCHAR(50) NOT NULL,
+    cognome VARCHAR(50) NOT NULL,
+    data_nascita DATE NOT NULL,
+    anno_iscrizione INTEGER NOT NULL
+);
+
+ALTER TABLE Studente 
+ADD CONSTRAINT unique_studente 
+UNIQUE (nome, cognome, data_nascita);
+
+-- Creazione della tabella Classe
+CREATE TABLE Classe (
+    id SERIAL PRIMARY KEY,
+    nome_classe VARCHAR(50) NOT NULL,
+    livello_scolastico INTEGER NOT NULL,
+    anno_scolastico INTEGER NOT NULL
+);
+
+-- Creazione della tabella Iscrizione
+CREATE TABLE Iscrizione (
+    id SERIAL PRIMARY KEY,
+    id_studente INTEGER NOT NULL REFERENCES Studente(id) ON DELETE CASCADE,
+    id_classe INTEGER NOT NULL REFERENCES Classe(id) ON DELETE CASCADE
+);
+
+-- Popolamento della tabella Studente con dati di esempio
+INSERT INTO Studente (nome, cognome, data_nascita, anno_iscrizione)
+VALUES 
+    ('Mario', 'Rossi', '2005-02-14', 2020),
+    ('Luca', 'Bianchi', '2006-05-23', 2021),
+    ('Giulia', 'Verdi', '2004-09-01', 2019),
+    ('Paolo', 'Neri', '2007-01-09', 2022),
+    ('Federica', 'Gialli', '2005-11-12', 2020);
+
+-- Popolamento della tabella Classe con dati di esempio
+INSERT INTO Classe (nome_classe, livello_scolastico, anno_scolastico)
+VALUES 
+    ('1A', 1, 2022),
+    ('2B', 2, 2022),
+    ('3C', 3, 2022);
+
+-- Popolamento della tabella Iscrizione con dati di esempio
+INSERT INTO Iscrizione (id_studente, id_classe)
+VALUES
+    (1, 1),
+    (2, 1),
+    (3, 2),
+    (4, 3),
+    (5, 3);
+

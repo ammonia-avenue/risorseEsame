@@ -1,0 +1,51 @@
+/*
+ **************************************************************
+ **************************************************************
+ **                     ROI PROJECT
+ **               Security e permissions
+ **************************************************************
+ **************************************************************
+*/
+
+/*
+***************************************************************************
+1) Creare 2 ruoli chiamati: assistenza e amministrazione
+***************************************************************************
+*/
+
+CREATE ROLE assistenza;
+CREATE ROLE amministrazione;
+
+/*
+***************************************************************************
+2) Dare il permesso a fare delle select sulla tabella ft_cliente al ruolo assistenza
+   e Dare il permesso a fare delle select sulla tabella ft_prodotto al ruolo amministrazione
+***************************************************************************
+*/
+GRANT SELECT ON ft_cliente TO assistenza;
+GRANT SELECT ON ft_prodotto TO amministrazione;
+
+/*
+***************************************************************************
+3) Revocare i permessi dati al punto 2
+***************************************************************************
+*/
+
+REVOKE SELECT ON ft_cliente FROM assistenza;
+REVOKE SELECT ON ft_prodotto TO amministrazione;
+
+/*
+***************************************************************************
+4) Creare un utente chiamato: utente_2 e associargli la passowrd: password2
+***************************************************************************
+*/
+CREATE USER utente_2 WITH PASSWORD 'password2';
+
+/*
+***************************************************************************
+5) Assegnare il ruolo di amministrazione all'utente: utente_2
+***************************************************************************
+*/
+GRANT amministrazione TO utente_2;
+
+

@@ -1,0 +1,707 @@
+# Verifica del corso 'Fondamenti di basi di dati'
+
+---
+
+### Nome: Davide
+### Cognome: Botta
+### Data: 12-07-2024
+
+---
+
+## Studenti, Esami e Corsi
+
+-- Di seguito trovi un esempio di database studenti corsi esami usando il linguaggio SQL. Il database contiene quattro tabelle: Studenti, Corsi, Esami e Docenti. Ogni tabella ha alcuni attributi che descrivono le entità e le relazioni tra di esse. 
+
+
+
+-- sql
+-- Creazione delle tabelle
+CREATE TABLE Studenti (
+  Matricola INT PRIMARY KEY,
+  Nome VARCHAR(50) NOT NULL,
+  Cognome VARCHAR(50) NOT NULL,
+  DataNascita DATE NOT NULL
+);
+
+CREATE TABLE Docenti (
+  CodDocente INT PRIMARY KEY,
+  Nome VARCHAR(50) NOT NULL,
+  Cognome VARCHAR(50) NOT NULL,
+  Email VARCHAR(100) NOT NULL
+);
+
+CREATE TABLE Corsi (
+  CodCorso INT PRIMARY KEY,
+  NomeCorso VARCHAR(100) NOT NULL,
+  Crediti TINYINT NOT NULL,
+  CodDocente INT NOT NULL,
+  FOREIGN KEY (CodDocente) REFERENCES Docenti(CodDocente)
+);
+CREATE TABLE Esami (
+  Matricola INT NOT NULL,
+  CodCorso INT NOT NULL,
+  Data DATE NOT NULL,
+  Voto TINYINT NOT NULL,
+  PRIMARY KEY (Matricola, CodCorso),
+  FOREIGN KEY (Matricola) REFERENCES Studenti(Matricola),
+  FOREIGN KEY (CodCorso) REFERENCES Corsi(CodCorso)
+);
+
+-- Inserimento di alcuni dati di esempio
+INSERT INTO Studenti VALUES
+(1001, 'Mario', 'Rossi', '2000-01-01'),
+(1002, 'Luca', 'Verdi', '1999-02-02'),
+(1003, 'Anna', 'Bianchi', '2000-03-03'),
+(1004, 'Sara', 'Neri', '1999-04-04'),
+(1005, 'Riccardo', 'Gialli', '2000-05-05'),
+(1006, 'Chiara', 'Rosa', '1999-06-06'),
+(1007, 'Alessandro', 'Marroni', '2000-07-07'),
+(1008, 'Elisa', 'Viola', '1999-08-08');
+INSERT INTO Studenti VALUES
+(1009, 'Marco', 'Blu', '2000-09-09'),
+(1010, 'Giulia', 'Celeste', '1999-10-10'),
+(1011, 'Francesco', 'Argento', '2000-11-11'),
+(1012, 'Raffaele', 'Bianco', '1999-12-12'),
+(1013, 'Stefano', 'Oro', '2000-01-13'),
+(1014, 'Valentina', 'Grigio', '1999-02-14'),
+(1015, 'Simone', 'Verde', '2000-03-15'),
+(1016, 'Martina', 'Azzurro', '1999-04-16'),
+(1017, 'Davide', 'Bronzo', '2000-05-17'),
+(1018, 'Eleonora', 'Lilla', '1999-06-18'),
+(1019, 'Matteo', 'Turchese', '2000-07-19'),
+(1020, 'Laura', 'Indaco', '1999-08-20'),
+(1021, 'Emanuele', 'Nero', '2000-09-21'),
+(1022, 'Roberta', 'Marrone', '1999-10-22'),
+(1023, 'Pietro', 'Rosso', '2000-11-23');
+INSERT INTO Docenti VALUES
+(201, 'Paolo', 'Mazzoni', 'paolo.mazzoni@universita.it'),
+(202, 'Laura', 'Ferrari', 'laura.ferrari@universita.it'),
+(203, 'Marco', 'Ricci', 'marco.ricci@universita.it'),
+(204, 'Elena', 'Galli', 'elena.galli@universita.it'),
+(205,'Mauro', 'De Rosa', 'mderosa@gmail.com');
+INSERT INTO Docenti VALUES
+(206, 'Giulia', 'Bianchi', 'giulia.bianchi@universita.it'),
+(207, 'Andrea', 'Neri', 'andrea.neri@universita.it'),
+(208, 'Sara', 'Verdi', 'sara.verdi@universita.it'),
+(209, 'Luca', 'Gialli', 'luca.gialli@universita.it'),
+(210, 'Chiara', 'Blu', 'chiara.blu@universita.it'),
+(211, 'Alessandro', 'Rosa', 'alessandro.rosa@universita.it'),
+(212, 'Martina', 'Celeste', 'martina.celeste@universita.it'),
+(213, 'Davide', 'Argento', 'davide.argento@universita.it'),
+(214, 'Elena', 'Bianco', 'elena.bianco@universita.it');
+
+INSERT INTO Corsi VALUES
+(101, 'Matematica', 6, 201),
+(102, 'Informatica', 9, 202),
+(103, 'Fisica', 6, 203),
+(104, 'Chimica', 9, 204),
+(105, 'Biologia', 7, 201),
+(106, 'Storia dell''arte', 8, 202),
+(107, 'Letteratura', 10, 203),
+(108, 'Economia', 7, 204);
+INSERT INTO Corsi VALUES
+(109, 'Psicologia', 6, 206),
+(110, 'Sociologia', 8, 206),
+(111, 'Filosofia', 9, 207),
+(112, 'Geografia', 7, 208),
+(113, 'Ingegneria', 10, 209),
+(114, 'Architettura', 9, 210),
+(115, 'Medicina', 12, 211),
+(116, 'Giurisprudenza', 11, 212),
+(117, 'Scienze Politiche', 7, 213),
+(118, 'Antropologia', 8, 214);
+
+INSERT INTO Esami VALUES
+(1001, 101, '2020-01-10', 28),
+(1001, 102, '2020-01-15', 30),
+(1002, 101, '2020-01-10', 25),
+(1002, 103, '2020-01-20', 27),
+(1003, 101, '2020-01-10', 30),
+(1003, 104, '2020-01-25', 26),
+(1004, 102, '2020-01-15', 24),
+(1004, 103, '2020-01-20', 29),
+(1005, 101, '2020-01-10', 26),
+(1006, 102, '2020-01-15', 28),
+(1006, 104, '2020-01-25', 26),
+(1006, 101, '2020-01-10', 29),
+(1007, 104, '2020-01-20', 28),
+(1007, 101, '2020-01-10', 25),
+(1008, 103, '2020-01-20', 30),
+(1008, 102, '2020-01-15', 27);
+INSERT INTO Esami VALUES
+(1009, 101, '2020-01-10', 27),
+(1009, 102, '2020-01-15', 29),
+(1010, 103, '2020-01-20', 30),
+(1010, 104, '2020-01-25', 28),
+(1011, 101, '2020-01-10', 26),
+(1011, 102, '2020-01-15', 30),
+(1012, 103, '2020-01-20', 25),
+(1012, 104, '2020-01-25', 27),
+(1013, 101, '2020-01-10', 28),
+(1013, 102, '2020-01-15', 24),
+(1014, 103, '2020-01-20', 29),
+(1014, 104, '2020-01-25', 30),
+(1015, 101, '2020-01-10', 30),
+(1015, 102, '2020-01-15', 26),
+(1016, 103, '2020-01-20', 28),
+(1016, 104, '2020-01-25', 25),
+(1017, 101, '2020-01-10', 29),
+(1017, 102, '2020-01-15', 27),
+(1018, 103, '2020-01-20', 30),
+(1018, 104, '2020-01-25', 26);
+INSERT INTO Esami VALUES
+(1001, 105, '2020-02-01', 21),
+(1001, 106, '2020-02-05', 19),
+(1002, 107, '2020-02-10', 17),
+(1002, 108, '2020-02-15', 22),
+(1003, 105, '2020-02-01', 23),
+(1003, 107, '2020-02-10', 18),
+(1004, 106, '2020-02-05', 15),
+(1004, 108, '2020-02-15', 20),
+(1005, 105, '2020-02-01', 24),
+(1005, 107, '2020-02-10', 16),
+(1006, 106, '2020-02-05', 22),
+(1006, 108, '2020-02-15', 19),
+(1007, 105, '2020-02-01', 26),
+(1007, 106, '2020-02-05', 17),
+(1008, 107, '2020-02-10', 20),
+(1008, 108, '2020-02-15', 23),
+(1009, 105, '2020-02-01', 18),
+(1009, 106, '2020-02-05', 21),
+(1010, 107, '2020-02-10', 19),
+(1010, 108, '2020-02-15', 15);
+
+
+---
+
+### Esercizi
+
+Esercizi SQL relativi al database **corsi**.
+
+---
+
+### 1. **Esercizio su Join:**
+
+- **Domanda:** Trova il nome e cognome degli studenti che hanno sostenuto un esame, insieme al nome del corso e il voto ottenuto.
+- **Query:**
+
+     ```sql
+    -- Scrivi qui l'istruzione SQL
+    select
+		s.nome,
+        s.cognome,
+        c.NomeCorso,
+        e.voto
+	from
+		studenti as s
+	join
+		esami as e on s.Matricola  = e.Matricola
+	join
+		corsi as c on e.CodCorso = c.CodCorso;
+    
+  ```
+	
+### 2. **Esercizio su Aggregazione:**
+
+- **Domanda:** Trova il voto medio per ogni corso.
+- **Query:**
+
+  ```sql
+    -- Scrivi qui l'istruzione SQL
+    select
+	 avg(e.voto)
+	from 
+		esami as e
+	left join
+		corsi as c on e.codcorso = c.codcorso
+	group by
+		c.codcorso;
+    
+  ```
+
+### 3. **Esercizio su Filtraggio:**
+
+- **Domanda:** Trova tutti gli studenti che hanno ottenuto un voto maggiore o uguale a 28.
+- **Query:**
+
+  ```sql
+    -- Scrivi qui l'istruzione SQL
+    select
+	s.*
+	from 
+		studenti as s
+	left join
+		esami as e on e.matricola  = s.matricola
+	where 
+		voto >= 28;
+    
+  ```
+
+### 4. **Esercizio su Inserimento dati:**
+
+- **Domanda:** Inserisci un nuovo studente nella tabella Studenti.
+- **Query:**
+
+  ```sql
+    -- Scrivi qui l'istruzione SQL
+    insert into 
+		studenti
+	values
+		(1024, 'Davide', 'Botta', '2004-01-25');
+		
+  ```
+
+### 5. **Esercizio su Aggiornamento dati:**
+
+- **Domanda:** Aggiorna l'email di un docente con CodDocente 201.
+- **Query:**
+
+  ```sql
+    -- Scrivi qui l'istruzione SQL
+    update
+		docenti
+	set
+		email = 'paolo.mazzoni@gmail.it'
+	where 
+		codDocente = 201;
+    
+  ```
+
+### 6. **Esercizio su Sottoquery:**
+
+- **Domanda:** Trova il nome e cognome degli studenti che hanno sostenuto più di 3 esami.
+- **Query:**
+
+  ```sql
+    -- Scrivi qui l'istruzione SQL
+    select
+		s.nome,
+		s.cognome
+	from
+		studenti as s
+	where 
+		s.matricola in (
+		select
+			e.matricola
+		from
+			esami as e
+		group by
+			e.matricola
+		having 
+			count(e.codcorso) > 3
+		);
+  ```
+
+### 7. **Esercizio su Group By e Having:**
+
+- **Domanda:** Trova i corsi che hanno una media voto superiore a 27.
+- **Query:**
+
+  ```sql
+    -- Scrivi qui l'istruzione SQL
+    select
+		c.*
+	from 
+		corsi as c
+	join
+		esami as e on e.codcorso = c.codcorso
+	group by
+		e.codcorso
+	having 
+		avg(e.voto) > 27;
+  ```
+
+### 8. **Esercizio su Left Join:**
+
+- **Domanda:** Trova tutti i corsi e, se presenti, i docenti che li insegnano.
+- **Query:**
+
+  ```sql
+    -- Scrivi qui l'istruzione SQL
+    select 
+		c.*,
+		d.nome, 
+		d.cognome
+	from 
+		corsi as c
+	left join 
+		docenti as d on c.coddocente = 	d.coddocente;
+  ```
+
+### 9. **Esercizio su Distinct:**
+
+- **Domanda:** Trova tutti i voti distinti che sono stati assegnati agli esami.
+- **Query:**
+
+  ```sql
+    -- Scrivi qui l'istruzione SQL
+    select distinct
+		e.voto
+	from 
+		esami as e;
+    
+  ```
+
+### 10. **Esercizio su Delete:**
+
+- **Domanda:** Cancella tutti gli esami del corso con CodCorso 102.
+- **Query:**
+
+  ```sql
+    -- Scrivi qui l'istruzione SQL
+    delete from 
+		esami 
+	where 
+		codcorso = 102;
+  ```
+
+---
+
+### 11. **Esercizio su WHERE:**
+
+- **Domanda:** Trova i docenti il cui cognome è 'Galli'.
+- **Query:**
+
+  ```sql
+    -- Scrivi qui l'istruzione SQL
+    select
+		*
+	from
+		docenti 
+	where 
+		cognome = 'Galli';
+    
+  ```
+
+### 12. **Esercizio su LIKE:**
+
+- **Domanda:** Trova tutti gli studenti il cui nome inizia con 'R'.
+- **Query:**
+
+  ```sql
+    -- Scrivi qui l'istruzione SQL
+    select 
+		*
+	from 
+		studenti 
+	where
+		nome like 'R%'; 
+    
+  ```
+
+### 13. **Esercizio su ORDER BY:**
+
+- **Domanda:** Elenca tutti i corsi ordinati per nome in ordine alfabetico.
+- **Query:**
+
+  ```sql
+    -- Scrivi qui l'istruzione SQL
+    select
+		*
+	from
+		corsi
+	order by
+		nomecorso;
+        
+  ```
+
+### 14. **Esercizio su DISTINCT:**
+
+- **Domanda:** Trova tutti i nomi dei corsi distinti presenti nella tabella Esami.
+- **Query:**
+
+  ```sql
+    -- Scrivi qui l'istruzione SQL
+    select distinct 
+		c.nomecorso
+	from
+		corsi as c
+	join esami as e 
+		on e.codcorso = c.codcorso;
+    
+  ```
+
+### 15. **Esercizio su LIMIT:**
+
+- **Domanda:** Trova i primi 5 studenti ordinati per matricola.
+- **Query:**
+
+  ```sql
+    -- Scrivi qui l'istruzione SQL
+    select 
+		*
+	from
+		studenti
+	order by
+		matricola
+	limit 5;
+    
+  ```
+
+### 16. **Esercizio su IN:**
+
+- **Domanda:** Trova gli esami sostenuti dagli studenti con matricola 1001, 1002, e 1003.
+- **Query:**
+
+  ```sql
+    -- Scrivi qui l'istruzione SQL
+    select 
+		*
+	from 
+		esami
+	where 
+		matricola in (1001, 1002, 1003);
+    
+  ```
+
+### 17. **Esercizio su IS NULL:**
+
+- **Domanda:** Trova i corsi che non hanno un docente assegnato (assumendo che CodDocente possa essere NULL).
+- **Query:**
+
+  ```sql
+    -- Scrivi qui l'istruzione SQL
+    select 
+		* 
+	from 
+		corsi 
+	where 
+		coddocente is null;
+    
+  ```
+
+### 18. **Esercizio su BETWEEN:**
+
+- **Domanda:** Trova gli studenti nati tra il 1 gennaio 1998 e il 31 dicembre 2000.
+- **Query:**
+
+  ```sql
+    -- Scrivi qui l'istruzione SQL
+    select 
+		*
+	from 
+		studenti
+	where
+		datanascita between '1998-01-01' and '2000-12-31';
+		
+  ```
+
+### 19. **Esercizio su GROUP BY con COUNT:**
+
+- **Domanda:** Conta il numero di esami sostenuti per ciascun corso.
+- **Query:**
+
+  ```sql
+    -- Scrivi qui l'istruzione SQL
+    select
+	count(codcorso) 
+	from 
+		esami
+	group by
+		codcorso;
+  ```
+
+### 20. **Esercizio su HAVING:**
+
+- **Domanda:** Trova i corsi che hanno più di 5 esami sostenuti.
+- **Query:**
+
+  ```sql
+    -- Scrivi qui l'istruzione SQL
+    select
+		c.* 
+	from
+		corsi as c
+	join
+		esami as e on c.codcorso = e.codcorso
+	group by
+		e.codcorso
+	having
+		codcorso > 5;
+    
+  ```
+
+### 21. **Esercizio su Join e Funzioni Aggregative:**
+
+- **Domanda:** Trova il numero totale di crediti per ogni studente.
+- **Query:**
+
+  ```sql
+    -- Scrivi qui l'istruzione SQL
+    select 
+		s.*,
+		sum(c.crediti) as totaleCrediti
+	from 
+		studenti as s
+	join 
+		esami as e on s.matricola = e.matricola
+	join 
+		corsi as c on e.codcorso = c.codcorso
+	group by
+		s.matricola, s.nome, s.cognome
+	order by 
+		s.matricola;
+    
+  ```
+
+### 22. **Esercizio su Join e Funzioni di Stringa:**
+
+- **Domanda:** Trova il nome completo degli studenti e il nome del corso in cui hanno ottenuto il voto più alto.
+- **Query:**
+
+  ```sql
+    -- Scrivi qui l'istruzione SQL
+    
+  ```
+
+### 23. **Esercizio su Sottoquery nella WHERE:**
+
+- **Domanda:** Trova gli studenti che non hanno sostenuto alcun esame.
+- **Query:**
+
+  ```sql
+    -- Scrivi qui l'istruzione SQL
+    select 
+		s.*
+	from 
+		studenti as s
+	where 
+		matricola not in (
+	select 
+		matricola
+	from 
+		esami 
+	) ;
+    
+  ```
+
+### 24. **Esercizio su Sottoquery nel SELECT:**
+
+- **Domanda:** Trova il numero di corsi tenuti da ogni docente.
+- **Query:**
+
+  ```sql
+    -- Scrivi qui l'istruzione SQL
+    select 
+		d.*
+		(select 
+			count(*) 
+		 from 
+			corsi as c 
+		 where 
+			c.CodDocente = d.CodDocente
+		) AS NumeroCorsi
+	from 
+		docenti as d
+	order by 
+		d.CodDocente;
+
+    
+  ```
+
+### 25. **Esercizio su Funzioni di Aggregazione:**
+
+- **Domanda:** Trova lo studente con la media voto più alta.
+- **Query:**
+
+  ```sql
+    -- Scrivi qui l'istruzione SQL
+    select 
+		studenti.*,
+		avg(esami.voto) as mediaVoto
+	from 
+		studenti
+	join 
+		esami on studenti.matricola = esami.matricola
+	group by 
+		studenti.matricola
+	order by 
+		mediavoto desc
+	limit 1;
+
+    
+  ```
+
+### 26. **Esercizio su Join Multipli:**
+
+- **Domanda:** Trova tutti i corsi, i rispettivi docenti e il numero di studenti iscritti a ciascun corso.
+- **Query:**
+
+  ```sql
+    -- Scrivi qui l'istruzione SQL
+    select 
+		corsi.*,
+		docenti.*,
+		count(esami.matricola) as numeroStudentiIscritti
+	from 
+		corsi
+	join 
+		docenti on corsi.coddocente = docenti.coddocente
+	left join 
+		esami on corsi.codcorso = esami.codcorso
+	group by 
+		corsi.codcorso, corsi.nomecorso, docenti.nome, docenti.cognome
+	order by 
+		corsi.codcorso;
+    
+  ```
+
+### 27. **Esercizio su Funzioni di Data:**
+
+- **Domanda:** Trova gli studenti che hanno compiuto 24 anni.
+- **Query:**
+
+  ```sql
+    -- Scrivi qui l'istruzione SQL
+    select 
+		*
+	from 
+		studenti
+	where 
+		timestampdiff(year, datanascita, curdate()) = 24;
+
+    
+  ```
+
+### 28. **Esercizio su Join e Funzioni Aggregative:**
+
+- **Domanda:** Trova il voto massimo, minimo e medio degli esami per ogni corso.
+- **Query:**
+
+  ```sql
+    -- Scrivi qui l'istruzione SQL
+    select
+		corsi.nomecorso,
+        max(esami.voto) as votoMax,
+        min(esami.voto) as votoMin,
+        avg(esami.voto) as votoMed
+	from 
+		corsi
+	left join 
+		esami on corsi.codcorso = esami.codcorso
+	group by 
+		corsi.codcorso, corsi.nomecorso
+	order by 
+		corsi.codcorso;
+    
+  ```
+
+### 29. **Esercizio su Funzioni di Aggregazione e Having:**
+
+- **Domanda:** Trova i docenti che insegnano più di un corso.
+- **Query:**
+
+  ```sql
+    -- Scrivi qui l'istruzione SQL
+    
+  ```
+
+### 30. **Esercizio su Join e Funzioni di Stringa:**
+
+- **Domanda:** Trova i docenti e i corsi in cui insegnano, concatenando il nome e cognome del docente e inun campo separato il nome del corso.
+- **Query:**
+
+  ```sql
+    -- Scrivi qui l'istruzione SQL
+    
+  ```

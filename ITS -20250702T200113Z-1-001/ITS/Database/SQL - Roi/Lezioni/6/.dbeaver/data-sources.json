@@ -1,0 +1,42 @@
+{
+	"folders": {},
+	"connections": {
+		"postgres-jdbc-1907249ddba-31b9d1e2b33c07bd": {
+			"provider": "postgresql",
+			"driver": "postgres-jdbc",
+			"name": "defaultdb",
+			"save-password": true,
+			"configuration": {
+				"host": "pg-5df1069-fintech2024botta.h.aivencloud.com",
+				"port": "10760",
+				"database": "defaultdb",
+				"url": "jdbc:postgresql://pg-5df1069-fintech2024botta.h.aivencloud.com:10760/defaultdb",
+				"configurationType": "MANUAL",
+				"home": "postgresql_client",
+				"type": "dev",
+				"closeIdleConnection": true,
+				"provider-properties": {
+					"@dbeaver-show-non-default-db@": "false",
+					"@dbeaver-chosen-role@": ""
+				},
+				"auth-model": "native"
+			}
+		}
+	},
+	"connection-types": {
+		"dev": {
+			"name": "Development",
+			"color": "255,255,255",
+			"description": "Regular development database",
+			"auto-commit": true,
+			"confirm-execute": false,
+			"confirm-data-change": false,
+			"smart-commit": false,
+			"smart-commit-recover": false,
+			"auto-close-transactions": true,
+			"close-transactions-period": 1800,
+			"auto-close-connections": true,
+			"close-connections-period": 14400
+		}
+	}
+}

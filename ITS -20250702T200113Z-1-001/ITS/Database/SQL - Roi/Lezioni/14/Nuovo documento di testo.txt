@@ -1,0 +1,22 @@
+/*
+***************************************************************************
+***************************************************************************
+                                LABORATORIO
+Realizzare e testare una procedura che gestisca la scrittura in una tabella di servizio, 
+con le seguenti colonne:
+	- nome_tabelle (conterrà il nome delle tabelle analizzate, ad esempio:ft_investimento_senza_ft_azienda)
+	- numero_record_orfani (conterrà la quantità di record orfani ovvero FIGLI SENZA PADRI)
+	
+La procedura dovrà confrontare le seguenti coppie di tabelle e scrivere il risultato nella tabella di servizio:
+	- investimenti senza azienda
+	- roi senza investimento
+	- prodotto senza categoria
+	
+La procedura deve gestire:
+	- la scrittura su tabella di log di quando inizia la procedura
+	- la scrittura su tabella di log di quando finisce la procedura
+	- all'interno della EXCEPTION la scrittura su tabella di log dell'eventuale errore riscontrato
+
+***************************************************************************
+***************************************************************************
+*/

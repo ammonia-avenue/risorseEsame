@@ -1,0 +1,5 @@
+dado
+dadoLinux
+
+su
+dadoLinuxRoot

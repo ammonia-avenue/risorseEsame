@@ -1,0 +1,46 @@
+Per far partire delle API scritte con FastAPI usando Uvicorn, devi assicurarti di avere tutto correttamente installato e seguire questi semplici passaggi:
+
+✅ 1. Installa i pacchetti necessari
+Se non l’hai già fatto:
+
+bash
+Copia
+Modifica
+pip install fastapi uvicorn
+✅ 2. Scrivi un file Python con FastAPI
+Ad esempio, crea un file chiamato main.py con questo contenuto:
+
+python
+Copia
+Modifica
+from fastapi import FastAPI
+
+app = FastAPI()
+
+@app.get("/")
+def read_root():
+    return {"Hello": "World"}
+✅ 3. Avvia l'app con Uvicorn
+Da terminale, nella cartella dove si trova main.py, esegui:
+
+bash
+Copia
+Modifica
+uvicorn main:app --reload
+Spiegazione:
+
+main: è il nome del file (senza .py)
+
+app: è l'istanza FastAPI creata dentro quel file
+
+--reload: fa sì che l'app si riavvii automaticamente quando cambi il codice (utile in sviluppo)
+
+✅ 4. Apri il browser
+Vai su:
+
+http://127.0.0.1:8000 → per vedere l'output dell'endpoint
+
+http://127.0.0.1:8000/docs → per la documentazione Swagger generata automaticamente
+
+http://127.0.0.1:8000/redoc → documentazione ReDoc
+

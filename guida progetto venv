@@ -26,6 +26,8 @@ Se non funziona, prova python3 -m venv venv
 
 Su Windows:
 
+Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope Process
+
 venv\Scripts\Activate.ps1
 ⚠️ VSCode spesso ti suggerisce automaticamente di usare l’ambiente virtuale: clicca su "Yes" se compare in alto.
 

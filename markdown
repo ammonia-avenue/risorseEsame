@@ -19,5 +19,6 @@
 ```python
 # Blocco di codice
 print("Ciao mondo")
+```
 
 ctrl shift v per vedere anteprima
